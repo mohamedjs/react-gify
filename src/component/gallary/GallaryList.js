@@ -28,17 +28,17 @@ class GallaryList extends React.Component {
 		});
 	}
 
-	componentDidMount() {
+	async componentDidMount() {
         // read all entities
-		fetch("https://api.giphy.com/v1/gifs/trending?api_key=2zE7UXfwOk9d888taHix1XudZ0claN1t&limit=10&offset=0", {"method": "GET"})
-		.then(response => response.json())
-		.then(response => {
-		    this.setState({
-		    	gallaryLists: response.data
+        try {
+			const response = await fetch("https://api.giphy.com/v1/gifs/trending?api_key=2zE7UXfwOk9d888taHix1XudZ0claN1t&limit=10&offset=0", {"method": "GET"})
+			const json = await response.json()
+			this.setState({
+		    	gallaryLists: json.data
 		    })
-		})
-		.catch(err => { console.log(err); 
-		});
+        } catch(err) {
+        	console.log(err)
+        }
         // save it to the state
         window.addEventListener('scroll', this.handleScroll)
     }
