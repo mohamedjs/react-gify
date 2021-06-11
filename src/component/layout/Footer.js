@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Footer extends Component {
     render() {
-        return <footer> Created By Mohamed Mahmoud </footer>;
+        return <footer> <center>Created By Mohamed Mahmoud</center> </footer>;
     }
 }
 
