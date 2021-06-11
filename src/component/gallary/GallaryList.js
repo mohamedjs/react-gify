@@ -18,11 +18,11 @@ class GallaryList extends React.Component {
 		.then(response => response.json())
 		.then(response => {
 			// Create a new array based on current state:
-			let gallaryLists = [...this.state.gallaryLists];
+			let GallaryLists = [...this.state.gallaryLists];
 			// Add item to it
-			response.data.map((data) => gallaryLists.push(data));
+			response.data.map((data) => GallaryLists.push(data));
 			// Set state
-			this.setState({ gallaryLists });
+			this.setState({ gallaryLists: GallaryLists });
 		})
 		.catch(err => { console.log(err); 
 		});
@@ -47,8 +47,9 @@ class GallaryList extends React.Component {
     	const scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
 		const scrollHeight = (document.documentElement && document.documentElement.scrollHeight) || document.body.scrollHeight;
 	    if ((scrollTop + window.innerHeight) === scrollHeight) {
+	    	var offset = this.state.offset+15
 	    	this.setState({
-	    		offset: this.state.offset+=15
+	    		offset: offset
 	    	})
 	      this.getData()
 	    }
