@@ -1,28 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import GallaryCard from './GallaryCard'
+import { connect } from 'react-redux';
+import { itemsFetchData } from '../../store/action/gallary-action';
 
-export default function GallaryList () {
-	const [gallaryLists, setGallaryLists] = useState([]);
+function GallaryList ({ gallaryLists, hasErrored, isLoading , fetchData}) {
 	const [limit] = useState(10);
 	const [offset, setOffset] = useState(1);
 
 	useEffect(() => {
-		async function getData()  {
-			try {
-				const response = await fetch(`https://api.giphy.com/v1/gifs/trending?api_key=2zE7UXfwOk9d888taHix1XudZ0claN1t
-				&limit=${limit}&offset=${offset}`, {"method": "GET"})
-				const json = await response.json()
-				// Create a new array based on current state:
-				let GallaryLists = [...gallaryLists];
-				// Add item to it
-				json.data.map((data) => GallaryLists.push(data));
-				// Set state
-				setGallaryLists(GallaryLists);
-			} catch(err) {
-				console.log(err)
-			}
-		}
-		getData()
+		fetchData(`https://api.giphy.com/v1/gifs/trending?api_key=2zE7UXfwOk9d888taHix1XudZ0claN1t
+		&limit=${limit}&offset=${offset}`)
 	}, [offset])
 
 	useEffect(() => {
@@ -36,6 +23,14 @@ export default function GallaryList () {
 	    	setOffset(offset => offset + 15)
 	    }
   	}
+	
+	  if (hasErrored) {
+		return <p>There has been an Error</p>;
+	}
+
+	if (isLoading) {
+		return <p>Loading...</p>;
+	}
 
 	return (
 		<div id="gallery" className="container-fluid">  
@@ -44,3 +39,23 @@ export default function GallaryList () {
 	);
 	
 }
+
+// Get state data from store to props
+function mapStateToProps(state){
+	console.log(state.items);
+    return {
+        gallaryLists: state.items,
+        hasErrored: state.itemsHasErrored,
+        isLoading: state.itemsIsLoading
+    };
+}
+
+// Get actions to handle store data
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchData: (url) => dispatch(itemsFetchData(url))
+    };
+}
+
+// Wire it all up and export
+export default connect(mapStateToProps, mapDispatchToProps)(GallaryList);
