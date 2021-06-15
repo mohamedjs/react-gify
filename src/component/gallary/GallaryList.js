@@ -42,11 +42,10 @@ function GallaryList ({ gallaryLists, hasErrored, isLoading , fetchData}) {
 
 // Get state data from store to props
 function mapStateToProps(state){
-	console.log(state.items);
     return {
-        gallaryLists: state.items,
-        hasErrored: state.itemsHasErrored,
-        isLoading: state.itemsIsLoading
+        gallaryLists: state.reduxThunk.data,
+        hasErrored: state.reduxThunk.loading,
+        isLoading: state.reduxThunk.error
     };
 }
 
