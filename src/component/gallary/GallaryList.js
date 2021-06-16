@@ -1,9 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import GallaryCard from './GallaryCard'
 import { connect } from 'react-redux';
-import { itemsFetchData } from '../../store/action/gallary-action';
+import { itemsFetchData } from '../../store/gallaries/gallaries.action';
+import { createStructuredSelector } from "reselect";
+import { selectGallaryValue, selectErrorValue, selectLoadingValue } from '../../store/gallaries/gallaries.selector';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
+import { Alert } from '@material-ui/lab';
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		position: 'absolute',
+		bottom:0,
+		top:100,
+		left:'50%'
+	},
+}))
 
 function GallaryList ({ gallaryLists, hasErrored, isLoading , fetchData}) {
+	const classes = useStyles();
 	const [limit] = useState(10);
 	const [offset, setOffset] = useState(1);
 
@@ -23,30 +38,26 @@ function GallaryList ({ gallaryLists, hasErrored, isLoading , fetchData}) {
 	    	setOffset(offset => offset + 15)
 	    }
   	}
-	
-	  if (hasErrored) {
-		return <p>There has been an Error</p>;
-	}
-
-	if (isLoading) {
-		return <p>Loading...</p>;
-	}
 
 	return (
 		<div id="gallery" className="container-fluid">  
 			{ gallaryLists.map((gallaryList, index) => <GallaryCard key={index} gif={gallaryList.images.preview_gif.url} /> ) }
+			{hasErrored && <Alert variant="filled" severity="error">
+				This is an error alert — check it out!
+			</Alert>}
+			{isLoading && <div className={classes.root}> <CircularProgress color="secondary" /> </div>}
 		</div>
 	);
 	
 }
 
 // Get state data from store to props
-function mapStateToProps(state){
-    return {
-        gallaryLists: state.reduxThunk.data,
-        hasErrored: state.reduxThunk.loading,
-        isLoading: state.reduxThunk.error
-    };
+function mapStateToProps () {
+	return createStructuredSelector({
+		gallaryLists: selectGallaryValue,
+		isLoading: selectLoadingValue,
+		hasErrored: selectErrorValue
+	});
 }
 
 // Get actions to handle store data
