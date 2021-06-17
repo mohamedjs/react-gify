@@ -1,8 +1,6 @@
 import { createSelector } from "reselect";
 
 const selectGallary = state => state.gallary
-const selectLoading = state => state.gallary;
-const selectError = state => state.gallary;
 
 export const selectGallaryValue = createSelector(
     [selectGallary],
@@ -10,11 +8,11 @@ export const selectGallaryValue = createSelector(
 );
 
 export const selectLoadingValue = createSelector(
-    [selectLoading],
+    [selectGallary],
     gallary => gallary.loading
 );
 
 export const selectErrorValue = createSelector(
-    [selectError],
+    [selectGallary],
     gallary => gallary.error
 );
