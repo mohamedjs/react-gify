@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		position: 'absolute',
 		bottom:0,
-		top:100,
 		left:'50%'
 	},
 }))
