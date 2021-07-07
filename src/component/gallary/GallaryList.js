@@ -3,7 +3,11 @@ import GallaryCard from './GallaryCard'
 import { connect } from 'react-redux';
 import { itemsFetchData } from '../../store/gallaries/gallaries.action';
 import { createStructuredSelector } from "reselect";
-import { selectGallaryValue, selectErrorValue, selectLoadingValue } from '../../store/gallaries/gallaries.selector';
+import { 
+	selectGallaryValue, 
+	selectErrorValue, 
+	selectLoadingValue 
+} from '../../store/gallaries/gallaries.selector';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { Alert } from '@material-ui/lab';
@@ -16,17 +20,20 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-function GallaryList ({ gallaryLists, hasErrored, isLoading , fetchData}) {
+function GallaryList ({ gallaryLists, hasErrored, isLoading , fetchData, match}) {
 	const classes = useStyles();
 	const [limit] = useState(10);
+	const [type, setType] = useState('trending');
 	const [offset, setOffset] = useState(1);
 
 	useEffect(() => {
-		fetchData(`https://api.giphy.com/v1/gifs/trending?api_key=2zE7UXfwOk9d888taHix1XudZ0claN1t
+		fetchData(`https://api.giphy.com/v1/gifs/${type}?api_key=2zE7UXfwOk9d888taHix1XudZ0claN1t
 		&limit=${limit}&offset=${offset}`)
 	}, [offset])
 
 	useEffect(() => {
+		var newType = match?match.params.type:'trending'
+		setType(type => newType)
 		window.addEventListener('scroll', handleScroll)
 	}, []);
 

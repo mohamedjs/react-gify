@@ -8,10 +8,11 @@ import {
   IconButton,
   Typography,
   InputBase,
-  Link,
+  Link as navLink,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
+import { BrowserRouter as Router, Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -94,15 +95,17 @@ export default function Header() {
             Gify
           </Typography>
           <Typography className={classes.links}>
-            <Link href="#" color="inherit">
-              Trending
-            </Link>
-            <Link href="#" color="inherit">
-              Random
-            </Link>
-            <Link href="#" color="inherit">
-              Link
-            </Link>
+            <Router>
+              <Link to="/type/trending" color="inherit">
+                Trending
+              </Link>
+              <Link to="/type/random" color="inherit">
+                Random
+              </Link>
+              <Link to="#" color="inherit">
+                Link
+              </Link>
+            </Router>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
