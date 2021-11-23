@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
     position: "relative",
     marginLeft: 0,
+    color: '#eee'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -95,17 +96,15 @@ export default function Header() {
             Gify
           </Typography>
           <Typography className={classes.links}>
-            <Router>
-              <Link to="/type/trending" color="inherit">
-                Trending
-              </Link>
-              <Link to="/type/random" color="inherit">
-                Random
-              </Link>
-              <Link to="#" color="inherit">
-                Link
-              </Link>
-            </Router>
+            <Link to="/" style={{ textDecoration: 'none', color: "#fff" }}>
+              Gify List
+            </Link>
+            <Link to="/tracker" style={{ textDecoration: 'none', color: "#fff" }}>    
+              Tracker
+            </Link>
+            <Link to="/social" style={{ textDecoration: 'none', color: "#fff" }}>
+              Social
+            </Link>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

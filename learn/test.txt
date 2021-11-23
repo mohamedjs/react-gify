@@ -1,0 +1,6 @@
+redux
+1- we create store and it's global things that's include our state
+2- we make action and action is contain all action that we need just describe
+3- we make reducer and reducer responsibility about what will change in the state after call action 
+4- in react component that will make some action we make (dispatch) for this action 
+5- we use provider to connect redux and store with our react project and in the global app file

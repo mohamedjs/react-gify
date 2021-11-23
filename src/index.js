@@ -6,13 +6,17 @@ import App from './App';
 import reportWebVitals from './test/reportWebVitals';
 import reducer from './store/mainReducer'
 import thunk from 'redux-thunk';
-let store = createStore(reducer, applyMiddleware(thunk));
+import { ThemeProvider } from '@material-ui/core';
+import { theme } from './theme';
 
+let store = createStore(reducer, applyMiddleware(thunk));
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
     <Provider store = {store}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </Provider>
   </StrictMode>,
   rootElement

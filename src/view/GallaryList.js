@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import GallaryCard from './GallaryCard'
+import GallaryCard from '../component/gallary/GallaryCard'
 import { connect } from 'react-redux';
-import { itemsFetchData } from '../../store/gallaries/gallaries.action';
+import { itemsFetchData } from '../store/gallaries/gallaries.action';
 import { createStructuredSelector } from "reselect";
-import { 
+import {
 	selectGallaryValue, 
 	selectErrorValue, 
 	selectLoadingValue 
-} from '../../store/gallaries/gallaries.selector';
+} from '../store/gallaries/gallaries.selector';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { Alert } from '@material-ui/lab';
