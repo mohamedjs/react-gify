@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import GallaryList from './GallaryList'
 import Tracker from './Tracker';
 import Social from './Social';
+import User from './user';
 export default function Index() {
     return (
         <div>
@@ -16,6 +17,7 @@ export default function Index() {
                     <Route path="/" exact component={GallaryList} />
                     <Route path="/tracker" component={Tracker} />
                     <Route path="/social" component={Social} />
+                    <Route path="/user" exact component={User} />
                 </Switch>
                 <Footer />
             </Router>

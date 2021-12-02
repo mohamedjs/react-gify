@@ -1,0 +1,67 @@
+{
+  "users" : [
+      {
+          "name" : "mohamed",
+          "address" : "street new cairo",
+          "email" : "mohamed@yahoo.com",
+          "contact" : "01102693822",
+          "id" : 1
+      },
+      {
+          "name" : "mohamed",
+          "address" : "street new cairo",
+          "email" : "mohamed@yahoo.com",
+          "contact" : "01102693822",
+          "id" : 2
+      },
+      {
+          "name" : "mohamed",
+          "address" : "street new cairo",
+          "email" : "mohamed@yahoo.com",
+          "contact" : "01102693822",
+          "id" : 3
+      },
+      {
+          "name" : "mohamed",
+          "address" : "street new cairo",
+          "email" : "mohamed@yahoo.com",
+          "contact" : "01102693822",
+          "id" : 1
+      },
+      {
+          "name" : "mohamed",
+          "address" : "street new cairo",
+          "email" : "mohamed@yahoo.com",
+          "contact" : "01102693822",
+          "id" : 2
+      },
+      {
+          "name" : "mohamed",
+          "address" : "street new cairo",
+          "email" : "mohamed@yahoo.com",
+          "contact" : "01102693822",
+          "id" : 3
+      },
+      {
+          "name" : "mohamed",
+          "address" : "street new cairo",
+          "email" : "mohamed@yahoo.com",
+          "contact" : "01102693822",
+          "id" : 1
+      },
+      {
+          "name" : "mohamed",
+          "address" : "street new cairo",
+          "email" : "mohamed@yahoo.com",
+          "contact" : "01102693822",
+          "id" : 3
+      }
+  ],
+  "posts": [
+    { "id": 1, "title": "json-server", "author": "typicode" }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 }
+  ],
+  "profile": { "name": "typicode" }
+}
