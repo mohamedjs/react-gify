@@ -5,21 +5,7 @@
       "address": "street new cairo",
       "email": "mohamed@yahoo.com",
       "contact": "01102693822",
-      "id": 1
-    },
-    {
-      "name": "mohamed",
-      "address": "street new cairo",
-      "email": "mohamed@yahoo.com",
-      "contact": "01102693822",
-      "id": 2
-    },
-    {
-      "name": "mohamed",
-      "address": "street new cairo",
-      "email": "mohamed@yahoo.com",
-      "contact": "01102693822",
-      "id": 3
+      "id": 0
     }
   ],
   "posts": [

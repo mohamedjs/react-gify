@@ -30,7 +30,7 @@ const UserTable = () => {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     let dispatch = useDispatch();
     const users = useSelector(state => state.user.users);
-
+    
     useEffect(() => {
         dispatch(loadUsers())
     }, [])
@@ -44,6 +44,10 @@ const UserTable = () => {
         setPage(0);
     };
 
+    const handleDeleteUser = (userId) => {
+        dispatch(deleteUser(userId))
+    }
+    
     return (
         <Paper className={classes.root}>
             <div className={classes.tableWrapper}>
@@ -64,7 +68,7 @@ const UserTable = () => {
                                     {columns.map(column => {
                                         const value = column.id !== 'action' ? user[column.id]
                                             : <ButtonGroup variant="contained" aria-label="contained primary button group">
-                                                <Button color="secondary" onClick={() => { dispatch(deleteUser(user.id)) }}>  Delete </Button>
+                                                <Button color="secondary" onClick={() => { handleDeleteUser(user.id) }}>  Delete </Button>
                                                 <Button color="primary">  Update </Button>
                                             </ButtonGroup>;
                                         return (

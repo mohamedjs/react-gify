@@ -8,6 +8,7 @@ import GallaryList from './GallaryList'
 import Tracker from './Tracker';
 import Social from './Social';
 import User from './user';
+import UserForm from '../component/user/UserForm';
 export default function Index() {
     return (
         <div>
@@ -18,6 +19,7 @@ export default function Index() {
                     <Route path="/tracker" component={Tracker} />
                     <Route path="/social" component={Social} />
                     <Route path="/user" exact component={User} />
+                    <Route path="/add-user" exact component={UserForm} />
                 </Switch>
                 <Footer />
             </Router>

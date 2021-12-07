@@ -6,10 +6,10 @@ const getUsers = (users) => ({
     payload: users
 })
 
-// const deleteUserbyId = (userId) => ({
-//     type: types.DELETE_USER,
-//     payload: userId
-// })
+const deleteUserbyId = (userId) => ({
+    type: types.DELETE_USER,
+    payload: userId
+})
 
 export const loadUsers = () => {
     return (dispatch) => {
@@ -27,7 +27,7 @@ export const deleteUser = (userId) => {
     return (dispatch) => {
         axios.delete("http://localhost:5000/users/"+userId)
         .then((res) => {
-            dispatch(loadUsers())
+            dispatch(deleteUserbyId(userId))
         })
         .catch((err) => {
             console.log(err);
