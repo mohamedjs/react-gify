@@ -1,195 +1,82 @@
-import { makeStyles } from "@material-ui/core";
-import React from "react";
-import { Field, reduxForm } from "redux-form";
-import {
-  TextField,
-  Checkbox,
-  FormControlLabel,
-  FormControl,
-  Select,
-  InputLabel,
-  FormHelperText,
-  Radio,
-  RadioGroup,
-} from "@material-ui/core";
-import asyncValidate from './asyncValidate'
+import { FormControl, Button, makeStyles, Paper, TextField, ButtonGroup } from "@material-ui/core";
+import axios from "axios";
+import React, {useEffect, useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from 'react-router-dom';
+import { addUserInfo, loadUsers } from "../../store/user/user.action";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    marginTop: theme.spacing(15)
+    marginTop: theme.spacing(15),
   },
+  form: {
+    border: "1px solid #b5b5b5",
+    borderRadius: "4px",
+    boxShadow: "1px 1px 10px #000",
+    padding: "12px",
+    marginLeft: "25%",
+    width: "50%"
+  },
+  formControl: {
+    marginBottom: theme.spacing(1)
+  }
 }));
 
-const validate = (values) => {
-  const errors = {};
-  const requiredFields = [
-    "firstName",
-    "lastName",
-    "email",
-    "favoriteColor",
-    "notes",
-  ];
-  requiredFields.forEach((field) => {
-    if (!values[field]) {
-      errors[field] = "Required";
-    }
-  });
-  if (
-    values.email &&
-    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-  ) {
-    errors.email = "Invalid email address";
-  }
-  return errors;
-};
 
-const renderTextField = ({
-  label,
-  input,
-  meta: { touched, invalid, error },
-  ...custom
-}) => (
-  <TextField
-    label={label}
-    placeholder={label}
-    error={touched && invalid}
-    helperText={touched && error}
-    {...input}
-    {...custom}
-  />
-);
-
-const renderCheckbox = ({ input, label }) => (
-  <div>
-    <FormControlLabel
-      control={
-        <Checkbox
-          checked={input.value ? true : false}
-          onChange={input.onChange}
-        />
-      }
-      label={label}
-    />
-  </div>
-);
-
-const radioButton = ({ input, ...rest }) => (
-  <FormControl>
-    <RadioGroup {...input} {...rest}>
-      <FormControlLabel value="female" control={<Radio />} label="Female" />
-      <FormControlLabel value="male" control={<Radio />} label="Male" />
-      <FormControlLabel value="other" control={<Radio />} label="Other" />
-    </RadioGroup>
-  </FormControl>
-);
-
-const renderFromHelper = ({ touched, error }) => {
-  if (!(touched && error)) {
-    return;
-  } else {
-    return <FormHelperText>{touched && error}</FormHelperText>;
-  }
-};
-
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => (
-  <FormControl error={touched && error}>
-    <InputLabel htmlFor="age-native-simple">Age</InputLabel>
-    <Select
-      native
-      {...input}
-      {...custom}
-      inputProps={{
-        name: "age",
-        id: "age-native-simple",
-      }}
-    >
-      {children}
-    </Select>
-    {renderFromHelper({ touched, error })}
-  </FormControl>
-);
-
-const UserForm = ({ handleSubmit, pristine, reset, submitting }) => {
+const UserForm = () => {
   const classes = useStyles();
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [contact, setContact] = useState('')
+  const [address, setAddress] = useState('')
+  const users = useSelector(state => state.user.users);
+  const param = useParams()
+  const dispatch = useDispatch()
+
+  const addUser = () => {
+    const id = parseInt(users[users.length - 1]['id']) + 1
+    const user = {id: id, name : name, email: email, contact: contact, address: address}
+    dispatch(addUserInfo(user));
+    window.location = '/user'
+  }
+
+  useEffect(() => {
+    dispatch(loadUsers())
+    if(param.id) {
+      axios.get('http://localhost:5000/users/'+param.id)
+        .then((res) => {
+          var currentUser = res.data
+          setName(currentUser.name)
+          setEmail(currentUser.email)
+          setAddress(currentUser.address)
+          setContact(currentUser.contact)
+        })
+        .catch(err => console.log(err))
+    }
+  }, [])
+  
   return (
     <div className={classes.root}>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <Field
-            name="firstName"
-            component={renderTextField}
-            label="First Name"
-          />
-        </div>
-        <div>
-          <Field
-            name="lastName"
-            component={renderTextField}
-            label="Last Name"
-          />
-        </div>
-        <div>
-          <Field name="email" component={renderTextField} label="Email" />
-        </div>
-        <div>
-          <Field name="sex" component={radioButton}>
-            <Radio value="male" label="male" />
-            <Radio value="female" label="female" />
-          </Field>
-        </div>
-        <div>
-          <Field
-            classes={classes}
-            name="favoriteColor"
-            component={renderSelectField}
-            label="Favorite Color"
-          >
-            <option value="" />
-            <option value={"ff0000"}>Red</option>
-            <option value={"00ff00"}>Green</option>
-            <option value={"0000ff"}>Blue</option>
-          </Field>
-        </div>
-        <div>
-          <Field name="employed" component={renderCheckbox} label="Employed" />
-        </div>
-        <div />
-        <div>
-          <Field
-            name="notes"
-            component={renderTextField}
-            label="Notes"
-            multiline
-            rowsMax="4"
-            margin="normal"
-          />
-        </div>
-        <div>
-          <button type="submit" disabled={pristine || submitting}>
-            Submit
-          </button>
-          <button
-            type="button"
-            disabled={pristine || submitting}
-            onClick={reset}
-          >
-            Clear Values
-          </button>
-        </div>
-      </form>
+      <Paper className={classes.form}>
+        <FormControl className={classes.formControl} fullWidth>
+          <TextField value={name} onChange={ e => setName(e.target.value) } id="filled-basic" label="Name" variant="filled" />
+        </FormControl>
+        <FormControl className={classes.formControl} fullWidth>
+          <TextField value={contact} onChange={ e => setContact(e.target.value) }id="filled-basic" label="Contact" variant="filled" />
+        </FormControl>
+        <FormControl className={classes.formControl} fullWidth>
+          <TextField value={address} onChange={ e => setAddress(e.target.value) }  id="filled-basic" label="Address" variant="filled" />
+        </FormControl>
+        <FormControl className={classes.formControl} fullWidth>
+          <TextField value={email} onChange={ e => setEmail(e.target.value) }id="filled-basic" label="ُEmail" variant="filled" />
+        </FormControl>
+        <ButtonGroup align="left" variant="contained" aria-label="contained primary button group">
+          <Button color="primary" align="center" onClick={() => addUser() }>  Add </Button>
+        </ButtonGroup>
+      </Paper>
     </div>
   );
 };
 
-export default reduxForm({
-    form: 'MaterialUiForm', // a unique identifier for this form
-    validate,
-    asyncValidate
-  })(UserForm);
+export default UserForm;

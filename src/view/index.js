@@ -19,7 +19,8 @@ export default function Index() {
                     <Route path="/tracker" component={Tracker} />
                     <Route path="/social" component={Social} />
                     <Route path="/user" exact component={User} />
-                    <Route path="/add-user" exact component={UserForm} />
+                    <Route path="/user-form" exact component={UserForm} />
+                    <Route path="/user-form/:id" exact component={UserForm} />
                 </Switch>
                 <Footer />
             </Router>

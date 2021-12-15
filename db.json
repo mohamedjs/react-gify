@@ -1,11 +1,25 @@
 {
   "users": [
     {
+      "id": 5,
       "name": "mohamed",
-      "address": "street new cairo",
-      "email": "mohamed@yahoo.com",
-      "contact": "01102693822",
-      "id": 0
+      "email": "mohamed",
+      "contact": "mohamed",
+      "address": "mohamed"
+    },
+    {
+      "id": 8,
+      "name": "mohamed",
+      "email": "mohamed",
+      "contact": "mohamed",
+      "address": "mohamed"
+    },
+    {
+      "id": 9,
+      "name": "mohamed",
+      "email": "mohamed",
+      "contact": "mohamed",
+      "address": "mohamed"
     }
   ],
   "posts": [

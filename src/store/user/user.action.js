@@ -10,6 +10,10 @@ const deleteUserbyId = (userId) => ({
     type: types.DELETE_USER,
     payload: userId
 })
+const addUser = (user) => ({
+    type: types.ADD_USER,
+    payload: user
+})
 
 export const loadUsers = () => {
     return (dispatch) => {
@@ -32,5 +36,13 @@ export const deleteUser = (userId) => {
         .catch((err) => {
             console.log(err);
         })
+    };
+}
+
+export const addUserInfo = (user) => {
+    return (dispatch) => {
+        axios.post('http://localhost:5000/users/', user)
+            .then( res => dispatch(addUser(user)) )
+            .catch(err => console.log(err))
     };
 }

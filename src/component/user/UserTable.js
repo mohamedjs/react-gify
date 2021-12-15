@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button, ButtonGroup, Paper, Table, TableBody, TableCell, TableHead, TablePagination, TableRow } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUsers, deleteUser } from '../../store/user/user.action';
+import { useHistory } from 'react-router-dom';
 
 const columns = [
     { id: 'id', label: '#', minWidth: 170, align: 'center', format: value => value.toLocaleString() },
@@ -30,6 +31,7 @@ const UserTable = () => {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     let dispatch = useDispatch();
     const users = useSelector(state => state.user.users);
+    const history = useHistory()
     
     useEffect(() => {
         dispatch(loadUsers())
@@ -69,7 +71,7 @@ const UserTable = () => {
                                         const value = column.id !== 'action' ? user[column.id]
                                             : <ButtonGroup variant="contained" aria-label="contained primary button group">
                                                 <Button color="secondary" onClick={() => { handleDeleteUser(user.id) }}>  Delete </Button>
-                                                <Button color="primary">  Update </Button>
+                                                <Button color="primary" onClick={() => history.push('/user-form/'+user.id)}>  Update </Button>
                                             </ButtonGroup>;
                                         return (
                                             <TableCell key={column.id} align={column.align}>

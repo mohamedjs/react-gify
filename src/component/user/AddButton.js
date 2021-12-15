@@ -16,7 +16,7 @@ const AddButton = () => {
     return (
         <div className={classes.root}>
             <ButtonGroup align="center" variant="contained" aria-label="contained primary button group">
-                <Button color="primary" align="center" onClick={() => { history.push('/add-user')}}>  Add User </Button>
+                <Button color="primary" align="center" onClick={() => { history.push('/user-form')}}>  Add User </Button>
             </ButtonGroup>
         </div>
     )
