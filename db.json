@@ -3,23 +3,30 @@
     {
       "id": 5,
       "name": "mohamed",
-      "email": "mohamed",
-      "contact": "mohamed",
-      "address": "mohamed"
+      "email": "mohamed@mail.com",
+      "contact": "01102693822",
+      "address": "cairo"
     },
     {
       "id": 8,
-      "name": "mohamed11",
-      "email": "ali",
-      "contact": "mohamed11",
-      "address": "mohamed11"
+      "name": "mohram",
+      "email": "ali@y.c",
+      "contact": "010",
+      "address": "cairo"
     },
     {
       "id": 9,
       "name": "noor",
       "email": "noor@google.com",
-      "contact": "egypt",
+      "contact": "012",
       "address": "cairo 123"
+    },
+    {
+      "id": 12,
+      "name": "ahmed",
+      "email": "n@y.c",
+      "contact": "011",
+      "address": "cairo"
     }
   ],
   "posts": [

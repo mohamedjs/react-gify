@@ -42,7 +42,7 @@ export const deleteUser = (userId) => {
 export const addUserInfo = (user) => {
     return (dispatch) => {
         axios.post('http://localhost:5000/users/', user)
-            .then( res => dispatch(addUser(user)) )
+            .then( res => dispatch(loadUsers()) )
             .catch(err => console.log(err))
     };
 }

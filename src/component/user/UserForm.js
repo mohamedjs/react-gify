@@ -33,19 +33,20 @@ const UserForm = () => {
   const users = useSelector(state => state.user.users);
   const param = useParams()
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const addUser = () => {
     const id = parseInt(users[users.length - 1]['id']) + 1
     const user = {id: id, name : name, email: email, contact: contact, address: address}
     dispatch(addUserInfo(user));
-    window.location = '/user'
+    history.push('/user')
   }
 
   const updateUser = () => {
     const id = param.id
     const user = {id: id, name : name, email: email, contact: contact, address: address}
     dispatch(updateUserInfo(id, user));
-    window.location = '/user'
+    history.push('/user')
   }
   
   useEffect(() => {
