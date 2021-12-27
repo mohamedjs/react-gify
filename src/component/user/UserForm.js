@@ -3,7 +3,7 @@ import axios from "axios";
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from 'react-router-dom';
-import { addUserInfo, loadUsers } from "../../store/user/user.action";
+import { addUserInfo, loadUsers, updateUserInfo } from "../../store/user/user.action";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,6 +41,13 @@ const UserForm = () => {
     window.location = '/user'
   }
 
+  const updateUser = () => {
+    const id = param.id
+    const user = {id: id, name : name, email: email, contact: contact, address: address}
+    dispatch(updateUserInfo(id, user));
+    window.location = '/user'
+  }
+  
   useEffect(() => {
     dispatch(loadUsers())
     if(param.id) {
@@ -72,7 +79,8 @@ const UserForm = () => {
           <TextField value={email} onChange={ e => setEmail(e.target.value) }id="filled-basic" label="ُEmail" variant="filled" />
         </FormControl>
         <ButtonGroup align="left" variant="contained" aria-label="contained primary button group">
-          <Button color="primary" align="center" onClick={() => addUser() }>  Add </Button>
+          { !param.id ? <Button color="primary" align="center" onClick={() => addUser() }>  Add </Button> 
+                     : <Button color="primary" align="center" onClick={() => updateUser() }>  Update </Button>}
         </ButtonGroup>
       </Paper>
     </div>

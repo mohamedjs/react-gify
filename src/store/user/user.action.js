@@ -46,3 +46,11 @@ export const addUserInfo = (user) => {
             .catch(err => console.log(err))
     };
 }
+
+export const updateUserInfo = (id, user) => {
+    return (dispatch) => {
+        axios.put('http://localhost:5000/users/'+id, user)
+            .then( res => dispatch(loadUsers()) )
+            .catch(err => console.log(err))
+    };
+}
